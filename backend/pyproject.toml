@@ -1,0 +1,26 @@
+[project]
+name = "ask-my-doc-backend"
+version = "0.1.0"
+description = "Hybrid RAG backend for doc Q&A — FastAPI + Qdrant + BM25 + reranker + Groq"
+authors = [
+    {name = "faysal725", email = "afaysal725@gmail.com"}
+]
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi (>=0.141.1,<0.142.0)",
+    "uvicorn (>=0.52.1,<0.53.0)",
+    "pydantic-settings (>=2.14.2,<3.0.0)",
+    "python-dotenv (>=1.2.2,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "pytest (>=9.1.1,<10.0.0)",
+    "ruff (>=0.16.1,<0.17.0)"
+]

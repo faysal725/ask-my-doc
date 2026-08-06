@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     qdrant_url: str = ""
     qdrant_api_key: str = ""
 
+    # Gemini (embeddings)
+    gemini_api_key: str = ""
+
     # App
     app_env: str = "development"
     cors_origins: str = "http://localhost:3000"

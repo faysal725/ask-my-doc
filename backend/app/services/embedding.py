@@ -14,9 +14,19 @@ MAX_CONCURRENT = 5
 MAX_RETRIES = 5
 
 
+try:
+    client.models.embed_content(
+        model="gemini-embedding-001",
+        contents="test",
+        config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT", output_dimensionality=768)
+    )
 
+except ClientError as e:
+    print("type:", type(e))
+    print("dir:", [a for a in dir(e) if not a.startswith("_")])
+    print("str:", str(e))
 
-async def _embed_single(text: str, task_type: str, chunk_id: int | str) -> dict:
+async def _embed_single(text: str, task_type: str, chunk_id: str) -> dict:
     """Embed one text with retry+backoff. returns dict w/ chunk_id, vector, success"""
     last_error = None
 
@@ -54,6 +64,12 @@ async def _embed_single(text: str, task_type: str, chunk_id: int | str) -> dict:
             await asyncio.sleep(wait)
             last_error = e
             continue 
+
+        except Exception as e:
+            wait = min(2 ** attempt + random.uniform(0, 1), 30)
+            await asyncio.sleep(wait)
+            last_error = e
+            continue
     return {"chunk_id": chunk_id, "vector": None, "success": False, "error": f"max retries exceeded: {last_error}"}
         
 

@@ -29,12 +29,30 @@ def _build_point(chunk: dict)-> PointStruct:
     point_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, key))
 
     payload = {k: v for k, v in chunk.items() if k != "vector"}
+    payload["chunk_id"] = key   # ← new line
     return PointStruct(
         id=point_id,
         vector=chunk["vector"],
         payload=payload
     )
 
+def fetch_all_chunks() -> list[dict]:
+    all_chunks = []
+    offset = None
+
+    while True:
+        points, offset = client.scroll(
+            collection_name=COLLECTION_NAME,
+            limit=100,
+            offset=offset,
+            with_payload=True,
+            with_vectors=False,
+        )
+        all_chunks.extend(point.payload for point in points)
+        if offset is None:
+            break
+
+    return all_chunks
 
 
 def upsert_chunks(chunks: list[dict]) -> tuple[int, list[str]]:

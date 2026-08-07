@@ -84,3 +84,29 @@ def upsert_chunks(chunks: list[dict]) -> tuple[int, list[str]]:
             errors.append(f"batch {i}-{i+len(batch)} failed after retries: {last_error}")
 
     return total, errors
+
+
+
+def search_vectors(query_vector: list[float], top_k: int = 10) -> list[dict]:
+    if not query_vector:
+        raise ValueError("query_vector empty")
+
+    try:
+        response = client.query_points(
+            collection_name=COLLECTION_NAME,
+            query=query_vector,
+            limit=top_k,
+            with_payload=True,
+        )
+    except Exception as e:
+        print(f"Qdrant search failed: {e}")
+        return []
+
+    results = []
+    for point in response.points:
+        results.append({
+            "chunk_id": point.payload["chunk_id"],
+            "score": point.score,
+            "payload": point.payload,
+        })
+    return results

@@ -21,7 +21,7 @@ def build_context(chunks: list[dict]) -> str:
     return "\n\n---\n\n".join(parts)
 
 
-def generate_answer(query: str, chunks: list[dict]) -> str:
+def generate_answer(query: str, chunks: list[dict], model: str = MODEL) -> str:
     if not chunks:
         return "I don't have enough context to answer that question."
 
@@ -38,7 +38,7 @@ Answer the question using only the context above. Cite sources by their heading_
     for attempt in range(MAX_RETRIES):
         try:
             response = client.chat.completions.create(
-                model=MODEL,
+                model=model,
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": user_prompt},

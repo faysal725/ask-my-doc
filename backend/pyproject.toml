@@ -6,7 +6,7 @@ authors = [
     {name = "faysal725", email = "afaysal725@gmail.com"}
 ]
 license = "MIT"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<4.0"
 dependencies = [
     "fastapi (>=0.141.1,<0.142.0)",
     "uvicorn (>=0.52.1,<0.53.0)",
@@ -17,7 +17,10 @@ dependencies = [
     "tiktoken (>=0.13.0,<0.14.0)",
     "google-genai (>=2.16.0,<3.0.0)",
     "rank-bm25 (>=0.2.2,<0.3.0)",
-    "sentence-transformers (>=5.7.0,<6.0.0)"
+    "sentence-transformers (>=5.7.0,<6.0.0)",
+    "datasets (>=2.14,<3.0)",
+    "langchain-community (>=0.3.0,<0.4.0)",
+    "langchain-google-genai (>=4.3.2,<5.0.0)"
 ]
 
 
@@ -28,5 +31,6 @@ build-backend = "poetry.core.masonry.api"
 [dependency-groups]
 dev = [
     "pytest (>=9.1.1,<10.0.0)",
-    "ruff (>=0.16.1,<0.17.0)"
+    "ruff (>=0.16.1,<0.17.0)",
+    "ragas (==0.2.15)"
 ]

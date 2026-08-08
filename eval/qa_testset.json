@@ -1,0 +1,82 @@
+[
+  {
+    "question": "What is prefetching in Next.js?",
+    "ground_truth": "Prefetching is the process of fetching resources like HTML and JavaScript ahead of time, before the user navigates to a route, so navigation feels instant."
+  },
+  {
+    "question": "Does Next.js prefetch routes automatically?",
+    "ground_truth": "Yes, Next.js automatically prefetches routes linked via the Link component when they enter the viewport, in production."
+  },
+  {
+    "question": "How can I manually prefetch a route in Next.js?",
+    "ground_truth": "You can manually prefetch by importing the useRouter hook from next/navigation and calling router.prefetch()."
+  },
+  {
+    "question": "What triggers hover-based prefetching in Next.js?",
+    "ground_truth": "Extending or ejecting the Link component allows prefetching to be triggered on hover or touch intent."
+  },
+  {
+    "question": "How do I disable prefetching for a specific link?",
+    "ground_truth": "You can disable prefetching by setting the prefetch prop to false on the Link component."
+  },
+  {
+    "question": "What order does Next.js use to prioritize prefetch requests?",
+    "ground_truth": "Next.js prioritizes links in the viewport first, then links showing user intent like hover or touch, in a small task queue."
+  },
+  {
+    "question": "Where does Next.js store prefetched data?",
+    "ground_truth": "Next.js stores prefetched React Server Component payloads in memory, keyed by route segments."
+  },
+  {
+    "question": "Can prefetching cause unwanted side effects?",
+    "ground_truth": "Yes, prefetching can trigger unwanted side effects if a route has side-effecting logic that runs on every prefetch request, which should be handled carefully."
+  },
+  {
+    "question": "How can I prevent too many prefetches from happening?",
+    "ground_truth": "You can prevent excessive prefetching by disabling automatic prefetch on links that don't need it, since Next.js prefetches links in the viewport by default."
+  },
+  {
+    "question": "What is Incremental Static Regeneration (ISR)?",
+    "ground_truth": "ISR allows static pages to be updated after build time without a full rebuild, by revalidating and regenerating pages in the background."
+  },
+  {
+    "question": "What does cacheComponents do in next.config.js?",
+    "ground_truth": "cacheComponents is a config option that enables the caching model used for Partial Prerendering and ISR with Cache Components."
+  },
+  {
+    "question": "What is Partial Prefetching in Next.js?",
+    "ground_truth": "Partial Prefetching allows a route to instantly show a prerendered shell for the static content while dynamic content streams in afterward."
+  },
+  {
+    "question": "How do I configure Babel in Next.js?",
+    "ground_truth": "You configure Babel by creating a .babelrc file or babel.config.js in the root directory of your project."
+  },
+  {
+    "question": "What happens if I create a custom Babel config in Next.js?",
+    "ground_truth": "If a custom Babel config file is found, Next.js treats it as the source of truth and it fully replaces the default Next.js Babel configuration unless you extend from next/babel."
+  },
+  {
+    "question": "How do I add presets without losing Next.js's default Babel behavior?",
+    "ground_truth": "You add presets or plugins on top of the next/babel preset in your Babel config so Next.js's default behavior is preserved."
+  },
+  {
+    "question": "What file is used to customize Babel presets and plugins in Next.js?",
+    "ground_truth": "The .babelrc file (or babel.config.js) is used to customize Babel presets and plugins."
+  },
+  {
+    "question": "How does client-side caching TTL work for static pages?",
+    "ground_truth": "Static pages have a client cache TTL of 5 minutes by default, controlling how long prefetched data stays cached in the client."
+  },
+  {
+    "question": "What's the difference in prefetching between static and dynamic pages?",
+    "ground_truth": "Static pages are fully prefetched by default, while dynamic pages are not prefetched unless a loading.js file is present, enabling streamed prefetching."
+  },
+  {
+    "question": "Does Next.js support hybrid caching between static and dynamic content?",
+    "ground_truth": "Yes, through Partial Prerendering, Next.js can serve a static shell instantly while streaming in dynamic content, combining static and dynamic caching behavior."
+  },
+  {
+    "question": "What is the recommended way to migrate to Cache Components from the Pages Router?",
+    "ground_truth": "The documentation provides a dedicated migration guide section explaining how existing ISR and caching behavior in the Pages Router maps to the Cache Components model in the App Router."
+  }
+]

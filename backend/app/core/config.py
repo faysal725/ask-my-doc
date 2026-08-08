@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     # Gemini (embeddings)
     gemini_api_key: str = ""
 
+    # Cohere (embeddings)
+    cohere_api_key: str = ""
+
     # App
     app_env: str = "development"
     cors_origins: str = "http://localhost:3000"

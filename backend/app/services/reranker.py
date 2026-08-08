@@ -1,25 +1,27 @@
-from sentence_transformers import CrossEncoder
+import cohere
+from app.core.config import settings
 
-_model: CrossEncoder | None = None
+client = cohere.ClientV2(api_key=settings.cohere_api_key)
 
-
-def _get_model() -> CrossEncoder:
-    global _model
-    if _model is None:
-        _model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
-    return _model
+MODEL = "rerank-v3.5"
 
 
 def rerank(query: str, chunks: list[dict], top_k: int = 5) -> list[dict]:
     if not chunks:
         return []
 
-    model = _get_model()
-    pairs = [(query, chunk["text"]) for chunk in chunks]
-    scores = model.predict(pairs)
+    documents = [chunk["text"] for chunk in chunks]
 
-    paired = list(zip(chunks, scores))
-    paired.sort(key=lambda pair: pair[1], reverse=True)
+    response = client.rerank(
+        model=MODEL,
+        query=query,
+        documents=documents,
+        top_n=top_k,
+    )
 
-    top_results = paired[:top_k]
-    return [{**chunk, "rerank_score": float(score)} for chunk, score in top_results]
+    results = []
+    for item in response.results:
+        chunk = chunks[item.index]
+        results.append({**chunk, "rerank_score": item.relevance_score})
+
+    return results

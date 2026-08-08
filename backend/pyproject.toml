@@ -17,7 +17,7 @@ dependencies = [
     "tiktoken (>=0.13.0,<0.14.0)",
     "google-genai (>=2.16.0,<3.0.0)",
     "rank-bm25 (>=0.2.2,<0.3.0)",
-    "sentence-transformers (>=5.7.0,<6.0.0)",
+    "cohere (>=7.0.8,<8.0.0)",
 ]
 
 
@@ -35,7 +35,6 @@ dev = [
 package-mode = false
 
 [tool.poetry.dependencies]
-torch = {version = "*", source = "pytorch-cpu"}
 
 [[tool.poetry.source]]
 name = "pytorch-cpu"

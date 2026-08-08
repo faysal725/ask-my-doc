@@ -4,7 +4,7 @@ A hybrid-retrieval RAG assistant for Next.js documentation, built with vector + 
 
 ## Demo
 
-Live: [add deployed link here]
+Live: [https://ask-my-doc-ten.vercel.app](https://ask-my-doc-ten.vercel.app)
 
 ## Problem & Motivation
 

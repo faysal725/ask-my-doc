@@ -5,7 +5,7 @@ from app.core.config import settings
 
 client = Groq(api_key=settings.groq_api_key)
 
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 MAX_RETRIES = 3
 
 SYSTEM_PROMPT = """You are a documentation assistant. Answer ONLY using the provided context chunks.

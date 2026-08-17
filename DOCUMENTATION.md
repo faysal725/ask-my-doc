@@ -366,7 +366,7 @@ pip install ragas langchain-openai langchain-google-genai groq qdrant-client pyt
 python run_ragas_eval.py
 ```
 
-**Evaluator model:** Groq's `llama-3.1-8b-instant` was used as the LLM judge rather than the production `llama-3.3-70b-versatile`, specifically to draw from a separate daily token-quota bucket — the 70B model's free-tier quota (100K tokens/day) was repeatedly exhausted during iterative debugging of the eval pipeline itself, while the 8B model's quota (500K tokens/day) was untouched.
+**Evaluator model:** Groq's `llama-3.1-8b-instant` was used as the LLM judge rather than the production `openai/gpt-oss-120b`, specifically to draw from a separate daily token-quota bucket — the 70B model's free-tier quota (100K tokens/day) was repeatedly exhausted during iterative debugging of the eval pipeline itself, while the 8B model's quota (500K tokens/day) was untouched.
 
 **Concurrency note:** RAGAS's default evaluation concurrency exceeded Groq's free-tier rate limit (30 requests/minute on the 8B model) when running faithfulness and context-recall checks, which each require multiple sequential LLM calls per sample. This caused widespread `TimeoutError`s. Fixed by explicitly passing a `RunConfig(max_workers=3, timeout=120)` to `evaluate()`, trading run duration for reliability.
 
